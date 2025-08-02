@@ -8,13 +8,10 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: List directory
-          command: pwd
+          name: Test policies
+          command: npx cerbos compile .
       - run:
-          name: List files
-          command: ls -la
-      - run:
-          name: Upload Policies
+          name: Upload policies
           environment:
             CERBOS_HUB_STORE_ID: GF5IFA563D8K
           command: |
