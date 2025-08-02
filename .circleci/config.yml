@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   upload-policies:
     docker:
-      - image: cimg/base:current
+      - image: cimg/node:24.5.0
     steps:
       - checkout
       - setup_remote_docker
@@ -15,15 +15,10 @@ jobs:
           command: ls -la
       - run:
           name: Upload Policies
+          environment:
+            CERBOS_HUB_STORE_ID: GF5IFA563D8K
           command: |
-            docker run --rm \
-              -e CERBOS_HUB_STORE_ID=GF5IFA563D8K \
-              -e CERBOS_HUB_CLIENT_ID=$CERBOS_HUB_CLIENT_ID \
-              -e CERBOS_HUB_CLIENT_SECRET=$CERBOS_HUB_CLIENT_SECRET \
-              -v /home/circleci/project:/policies \
-              -w /policies \
-              ghcr.io/cerbos/cerbosctl:latest \
-              hub store replace-files /policies --message="Policy upload from CircleCI"
+            npx cerbosctl hub store replace-files . --message="Policy upload from CircleCI"
 
 workflows:
   build-and-upload:
