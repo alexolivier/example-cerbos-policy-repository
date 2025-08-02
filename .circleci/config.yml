@@ -8,6 +8,12 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: List directory
+          command: pwd
+      - run:
+          name: List files
+          command: ls -la
+      - run:
           name: Upload Policies
           command: |
             docker run --rm \
