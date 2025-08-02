@@ -23,7 +23,7 @@ jobs:
               -v /home/circleci/project:/policies \
               -w /policies \
               ghcr.io/cerbos/cerbosctl:latest \
-              hub store replace-files . --message="Policy upload from CircleCI"
+              hub store replace-files /policies --message="Policy upload from CircleCI"
 
 workflows:
   build-and-upload:
